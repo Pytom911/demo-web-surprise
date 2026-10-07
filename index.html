@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Untuk Kamu 💕</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;1,500&family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              script: ['"Dancing Script"', "cursive"],
+              serif: ['"Playfair Display"', "serif"],
+              sans: ["Poppins", "sans-serif"],
+            },
+            colors: { wine: "#6b1d36", blush: "#fff1f2" },
+          },
+        },
+      };
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: linear-gradient(180deg, #fff1f2, #ffe4e6 45%, #fff1f2);
+        color: #5b2333;
+      }
+      .rv {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.8s,
+          transform 0.8s;
+      }
+      .rv.on {
+        opacity: 1;
+        transform: none;
+      }
+      .petal {
+        position: fixed;
+        top: -30px;
+        z-index: 30;
+        pointer-events: none;
+        animation: fall linear forwards;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(112vh) rotate(380deg);
+        }
+      }
+      @keyframes beat {
+        50% {
+          transform: scale(1.25);
+        }
+      }
+      .beat {
+        animation: beat 1s infinite;
+      }
+      @keyframes shake {
+        20% {
+          transform: rotate(-10deg);
+        }
+        40% {
+          transform: rotate(10deg);
+        }
+        60% {
+          transform: rotate(-8deg);
+        }
+        80% {
+          transform: rotate(8deg);
+        }
+      }
+      .shake {
+        animation: shake 0.7s;
+      }
+      .strip {
+        background: #fff;
+        padding: 10px 10px 14px;
+        box-shadow: 0 14px 30px #be123c30;
+        position: relative;
+      }
+      .strip img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        filter: sepia(0.35) contrast(1.05) saturate(0.9);
+        display: block;
+        background: linear-gradient(135deg, #fecdd3, #fda4af);
+      }
+      .tape {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        width: 70px;
+        height: 22px;
+        background: #fbcfe8aa;
+        transform: translateX(-50%) rotate(-3deg);
+      }
+      .paper {
+        background: #fffdf8 linear-gradient(transparent 31px, #f6d5db 32px) 0
+          0/100% 32px;
+        line-height: 32px;
+      }
+      .fold {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 1.4s ease;
+      }
+      .fold.open {
+        max-height: 1400px;
+      }
+      .dv {
+        display: flex;
+        justify-content: center;
+        gap: 0.75rem;
+        color: #fb7185;
+        font-size: 1.25rem;
+        padding: 0.5rem 0 1.5rem;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .petal,
+        .beat,
+        .shake {
+          animation: none;
+        }
+        .rv {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="overflow-hidden font-sans">
+    <!-- LOADING SCREEN -->
+    <div
+      id="loader"
+      class="fixed inset-0 z-50 grid place-items-center bg-gradient-to-br from-rose-200 via-rose-100 to-pink-200 transition-opacity duration-700 text-center px-6"
+    >
+      <div>
+        <i
+          class="bi bi-heart-fill text-6xl text-rose-500 beat inline-block"
+        ></i>
+        <p class="font-script text-3xl text-wine mt-4">
+          Menyiapkan sesuatu yang spesial...
+        </p>
+        <p class="text-xs text-rose-400 mt-1">
+          menata bunga, menulis surat, membungkus kado
+        </p>
+        <div
+          class="w-56 h-2 bg-white/70 rounded-full mx-auto mt-5 overflow-hidden"
+        >
+          <div
+            id="bar"
+            class="h-full w-0 bg-rose-500 rounded-full transition-all duration-300"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <header
+      class="relative min-h-screen grid place-items-center text-center px-6 overflow-hidden"
+    >
+      <i
+        class="bi bi-flower2 absolute -top-6 -left-6 text-[9rem] text-rose-300/60 rotate-12"
+      ></i>
+      <i
+        class="bi bi-flower1 absolute -bottom-8 -right-6 text-[10rem] text-pink-300/60 -rotate-12"
+      ></i>
+      <i
+        class="bi bi-flower3 absolute top-1/3 -right-8 text-8xl text-rose-200"
+      ></i>
+      <div class="relative max-w-xl">
+        <i class="bi bi-envelope-heart-fill text-5xl text-rose-500"></i>
+        <p class="mt-4 text-rose-400">ada yang ingin kusampaikan untuk</p>
+        <h1
+          class="font-script text-7xl sm:text-8xl text-wine leading-tight"
+          data-to
+        >
+          Sayang
+        </h1>
+        <p class="font-serif italic text-lg text-rose-700 mt-2">
+          Kejutan kecil dari seseorang yang terlalu sayang sama kamu.
+        </p>
+        <div
+          class="inline-flex items-center gap-2 bg-white/80 rounded-full px-5 py-2 mt-6 shadow text-sm"
+        >
+          <i class="bi bi-calendar-heart text-rose-500"></i> Sudah
+          <b id="days">0</b> hari kita bersama
+        </div>
+        <div>
+          <a
+            href="#story"
+            class="inline-flex items-center gap-2 mt-8 bg-rose-500 hover:bg-rose-600 text-white px-8 py-3 rounded-full shadow-lg transition"
+            >Mulai kejutannya <i class="bi bi-chevron-double-down"></i
+          ></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- OUR STORY -->
+    <section id="story" class="max-w-4xl mx-auto px-5 py-20">
+      <div class="dv"></div>
+      <h2 class="font-script text-5xl text-center text-wine rv">Our Story</h2>
+      <p class="text-center text-rose-500 mb-12 rv">
+        Dari “halo” kecil menjadi cerita yang paling kusuka.
+      </p>
+      <div id="tl" class="relative">
+        <div
+          class="absolute top-0 bottom-0 left-4 md:left-1/2 w-0.5 bg-gradient-to-b from-rose-200 via-rose-400 to-rose-200"
+        ></div>
+      </div>
+      <div class="grid grid-cols-3 gap-3 mt-6 text-center rv" id="stats"></div>
+    </section>
+
+    <!-- PHOTOBOOTH -->
+    <section class="py-20 bg-rose-100/60">
+      <div class="dv"></div>
+      <h2 class="font-script text-5xl text-center text-wine rv">
+        Photobooth Kita
+      </h2>
+      <p class="text-center text-rose-500 mb-12 px-5 rv">
+        Empat pose, empat ekspresi, satu kamu yang selalu jadi favoritku.
+      </p>
+      <div id="booth" class="flex flex-wrap justify-center gap-10 px-4"></div>
+    </section>
+
+    <!-- A LETTER FOR YOU -->
+    <section class="max-w-2xl mx-auto px-5 py-20 text-center">
+      <div class="dv"></div>
+      <h2 class="font-script text-5xl text-wine rv">A Letter for You</h2>
+      <p class="text-rose-500 mb-8 rv">
+        Ketuk amplopnya, pelan-pelan saja bacanya.
+      </p>
+      <button id="env" class="group mx-auto block rv" aria-expanded="false">
+        <i
+          class="bi bi-envelope-heart-fill text-8xl text-rose-500 group-hover:scale-110 inline-block transition"
+        ></i>
+        <span class="block text-sm text-rose-400 mt-1" id="envHint"
+          >Ketuk untuk membuka</span
+        >
+      </button>
+      <div id="letter" class="fold">
+        <div
+          class="paper text-left rounded-lg shadow-xl border border-rose-100 mt-8 px-6 sm:px-10 py-8 font-script text-2xl text-wine"
+        >
+          <p>Untuk <span data-to>Sayang</span>,</p>
+          <p>
+            Aku bingung mulai dari mana, karena terlalu banyak yang ingin
+            kusampaikan. Jadi kumulai dari yang paling jujur: terima kasih sudah
+            memilih tinggal.
+          </p>
+          <p>
+            Terima kasih sudah sabar waktu aku keras kepala, tetap ada waktu aku
+            lupa kabar, dan tetap tertawa pada leluconku yang sebenarnya nggak
+            lucu.
+          </p>
+          <p>
+            Bersamamu, hari biasa terasa seperti hari libur. Kopi dingin pun
+            rasanya enak, asal ada kamu di seberang meja.
+          </p>
+          <p>
+            Kalau suatu hari kamu lelah, ingat bahwa kamu punya satu rumah yang
+            tidak pernah mengunci pintunya. Itu aku.
+          </p>
+          <p>
+            Aku nggak janji jadi sempurna. Tapi aku janji akan terus belajar
+            menyayangimu dengan cara yang lebih baik, setiap hari.
+          </p>
+          <p class="text-right">
+            Dengan seluruh hatiku,<br /><span data-from>Aku</span>
+            <i class="bi bi-heart-fill text-rose-500"></i>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LITTLE THINGS -->
+    <section class="py-20 bg-rose-100/60 px-5">
+      <div class="dv"></div>
+      <h2 class="font-script text-5xl text-center text-wine rv">
+        Little Things I Want You to Know
+      </h2>
+      <p class="text-center text-rose-500 mb-10 rv">
+        Hal-hal kecil yang jarang kuucapkan, tapi selalu kurasakan.
+      </p>
+      <div
+        id="little"
+        class="max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+      ></div>
+    </section>
+
+    <!-- GIFT -->
+    <section class="max-w-3xl mx-auto px-5 py-20 text-center">
+      <div class="dv"></div>
+      <h2 class="font-script text-5xl text-wine rv">Kado untuk Kamu</h2>
+      <p class="text-rose-500 mb-8 rv">
+        Ada sesuatu di dalam kotak ini. Berani buka?
+      </p>
+      <button id="gift" class="mx-auto block">
+        <i
+          class="bi bi-gift-fill text-9xl text-rose-500 inline-block hover:scale-105 transition"
+        ></i
+        ><span class="block text-sm text-rose-400">Ketuk kadonya</span>
+      </button>
+      <div id="coupons" class="hidden mt-4">
+        <p class="font-serif italic text-rose-700 mb-5">
+          Kupon cinta, berlaku selamanya, tanpa syarat dan ketentuan (kecuali
+          nomor 2).
+        </p>
+        <div id="cp" class="grid sm:grid-cols-2 gap-4 text-left"></div>
+      </div>
+    </section>
+
+    <!-- ASK -->
+    <section
+      class="px-5 py-24 text-center bg-gradient-to-b from-transparent to-rose-200/70"
+    >
+      <i class="bi bi-flower1 text-4xl text-rose-400"></i>
+      <h2
+        class="font-serif text-3xl sm:text-4xl text-wine mt-3 max-w-xl mx-auto leading-snug rv"
+      >
+        Satu pertanyaan terakhir...
+      </h2>
+      <p class="mt-3 text-lg max-w-md mx-auto rv">
+        Boleh nggak aku terus jadi pasanganmu, besok, lusa, dan seterusnya?
+      </p>
+      <div id="arena" class="relative h-40 max-w-md mx-auto mt-8">
+        <button
+          id="yes"
+          class="absolute left-1/2 -translate-x-[110%] top-4 bg-rose-500 hover:bg-rose-600 text-white px-7 py-3 rounded-full shadow-lg"
+        >
+          <i class="bi bi-heart-fill"></i> Boleh banget
+        </button>
+        <button
+          id="no"
+          class="absolute left-1/2 top-4 ml-2 bg-white text-rose-400 px-6 py-3 rounded-full shadow border border-rose-200 transition-all duration-200"
+        >
+          Hmm, nggak
+        </button>
+      </div>
+      <div id="yay" class="hidden">
+        <i
+          class="bi bi-balloon-heart-fill text-6xl text-rose-500 beat inline-block"
+        ></i>
+        <p class="font-script text-4xl text-wine mt-2">
+          Yeay! Janji ya, <span data-to>Sayang</span>.
+        </p>
+        <p class="mt-1">Aku sayang kamu, hari ini dan semua hari setelahnya.</p>
+      </div>
+      <p class="mt-14 text-3xl">🌹🌷🌸🌷🌹</p>
+      <p class="text-sm text-rose-400 mt-2">
+        Dibuat dengan cinta oleh <span data-from>Aku</span>
+      </p>
+    </section>
+
+    <script>
+      // ====== EDIT BAGIAN INI ======
+      const C = {
+        to: "Sayang",
+        from: "Aku yang paling sayang kamu",
+        start: "2023-02-14",
+      };
+      // Foto Unsplash (ganti dengan foto kalian sendiri: cukup tempel URL lengkap di "u")
+      const U = (id) =>
+        `https://images.unsplash.com/${id}?auto=format&fit=crop&w=500&q=70`;
+      const P = [
+        [U("photo-1518199266791-5375a83190b7"), "Pose 1: malu-malu"],
+        [U("photo-1516589178581-6cd7833ae3b2"), "Pose 2: pura-pura cool"],
+        [U("photo-1529634806980-85c3dd6d34ac"), "Pose 3: gagal nahan ketawa"],
+        [U("photo-1522673607200-164d1b6ce486"), "Pose 4: gandengan aja"],
+        [U("photo-1474552226712-ac0f0961a954"), "Pose 5: peluk dulu"],
+        [U("photo-1494774157365-9e04c6720e47"), "Pose 6: senyum bareng"],
+        [U("photo-1490750967868-88aa4486c946"), "Pose 7: bunga buat kamu"],
+        [U("photo-1455659817273-f96807779a8a"), "Pose 8: kamu, selalu"],
+      ];
+      const T = [
+        [
+          "bi-stars",
+          "Awal",
+          "Pertama Kali Bertemu",
+          "Aku belum tahu hari itu akan jadi pembuka cerita favoritku.",
+        ],
+        [
+          "bi-chat-heart",
+          "Beberapa hari kemudian",
+          "Chat yang Nggak Mau Selesai",
+          "Katanya cuma balas sebentar, ujung-ujungnya sampai subuh.",
+        ],
+        [
+          "bi-cup-hot-fill",
+          "Kencan pertama",
+          "Pura-pura Tenang",
+          "Mukaku santai, tapi jantungku lagi lomba lari maraton.",
+        ],
+        [
+          "bi-heart-fill",
+          "Hari kita resmi",
+          "Keputusan Paling Berani",
+          "Bilang sayang itu menakutkan. Tapi lebih menakutkan lagi kalau nggak bilang.",
+        ],
+        [
+          "bi-flower1",
+          "Hari ini",
+          "Dan Masih Panjang",
+          "Semua halaman berikutnya masih kosong, siap kita isi berdua.",
+        ],
+      ];
+      const L = [
+        ["bi-emoji-laughing", "Aku suka caramu tertawa sampai lupa napas."],
+        [
+          "bi-moon-stars",
+          "Saat kamu diam, aku tetap mendengarkan. Aku mengerti bahasa diammu.",
+        ],
+        [
+          "bi-trophy",
+          "Aku bangga padamu, bahkan di hari kamu merasa biasa-biasa saja.",
+        ],
+        [
+          "bi-egg-fried",
+          "Kentang gorengku yang terakhir? Ambil saja. Tapi tolong bilang makasih. (Bercanda, ambil.)",
+        ],
+        [
+          "bi-house-heart",
+          "Kamu nggak harus kuat terus. Ada aku untuk jadi tempat pulang.",
+        ],
+        [
+          "bi-bell",
+          "Notifikasi darimu selalu kubuka duluan, mengalahkan notif diskon.",
+        ],
+        [
+          "bi-camera",
+          "Foto jelekmu pun kusimpan. Itu koleksi paling berharga.",
+        ],
+        [
+          "bi-infinity",
+          "Kalau ditanya mau ke mana, jawabanku masih sama: ke tempat kamu ada.",
+        ],
+      ];
+      const K = [
+        ["bi-hand-thumbs-up", "Pijat pegal-pegal 15 menit, tanpa protes"],
+        ["bi-geo-alt", "Pilih tempat makan, dilarang jawab “terserah”"],
+        ["bi-film", "Nonton film pilihanmu, aku nggak komentar"],
+        ["bi-balloon-heart", "Satu pelukan erat, bisa diklaim kapan saja"],
+      ];
+      // ==============================
+
+      document
+        .querySelectorAll("[data-to]")
+        .forEach((e) => (e.textContent = C.to));
+      document
+        .querySelectorAll("[data-from]")
+        .forEach((e) => (e.textContent = C.from));
+      document
+        .querySelectorAll(".dv")
+        .forEach(
+          (e) =>
+            (e.innerHTML =
+              '<i class="bi bi-flower1"></i><i class="bi bi-heart-fill text-sm self-center"></i><i class="bi bi-flower3"></i>'),
+        );
+
+      // Hari bersama
+      const d = Math.max(
+        0,
+        Math.floor((Date.now() - new Date(C.start)) / 864e5),
+      );
+      document.getElementById("days").textContent = d.toLocaleString("id-ID");
+      document.getElementById("stats").innerHTML = [
+        [d.toLocaleString("id-ID"), "hari bersama"],
+        ["∞", "kali bilang “terserah”"],
+        ["1", "kamu yang kupilih"],
+      ]
+        .map(
+          (s) =>
+            `<div class="bg-white/80 rounded-2xl p-4 shadow border border-rose-100"><div class="font-serif text-3xl text-rose-600">${s[0]}</div><div class="text-xs mt-1">${s[1]}</div></div>`,
+        )
+        .join("");
+
+      // Timeline
+      document
+        .getElementById("tl")
+        .insertAdjacentHTML(
+          "beforeend",
+          T.map(
+            (t, i) =>
+              `<div class="rv relative pl-12 md:pl-0 md:w-1/2 mb-10 ${i % 2 ? "md:ml-auto md:pl-10" : "md:pr-10 md:text-right"}"><span class="absolute top-3 left-4 -translate-x-1/2 ${i % 2 ? "md:left-0" : "md:left-auto md:right-0 md:translate-x-1/2"} w-9 h-9 grid place-items-center rounded-full bg-rose-500 text-white shadow-lg ring-4 ring-rose-100"><i class="bi ${t[0]}"></i></span><div class="bg-white/85 rounded-2xl p-5 shadow-md border border-rose-100"><p class="text-xs text-rose-400">${t[1]}</p><h3 class="font-serif text-xl text-rose-700 my-1">${t[2]}</h3><p class="text-sm leading-relaxed">${t[3]}</p></div></div>`,
+          ).join(""),
+        );
+
+      // Photobooth: 2 strip x 4 foto
+      const strip = (a, r) =>
+        `<div class="strip w-48 sm:w-56 rv" style="transform:rotate(${r}deg)"><span class="tape"></span>${a.map((p) => `<img src="${p[0]}" alt="" loading="lazy" onerror="this.removeAttribute('src')"><p class="font-script text-lg text-center text-rose-700 mb-2">${p[1]}</p>`).join("")}<p class="text-center text-xs tracking-widest text-rose-400 pt-1"><i class="bi bi-heart-fill"></i> PHOTOBOOTH <i class="bi bi-heart-fill"></i></p></div>`;
+      document.getElementById("booth").innerHTML =
+        strip(P.slice(0, 4), -3) + strip(P.slice(4), 3);
+
+      // Little things
+      document.getElementById("little").innerHTML = L.map(
+        (l) =>
+          `<div class="rv bg-white/85 rounded-2xl p-5 shadow border border-rose-100 hover:-translate-y-1 transition"><i class="bi ${l[0]} text-3xl text-rose-500"></i><p class="mt-3 text-sm leading-relaxed">${l[1]}</p></div>`,
+      ).join("");
+
+      // Kupon
+      document.getElementById("cp").innerHTML = K.map(
+        (k, i) =>
+          `<div class="flex items-center gap-4 bg-white rounded-xl p-4 border-2 border-dashed border-rose-300 shadow-sm"><i class="bi ${k[0]} text-3xl text-rose-500"></i><div><p class="text-xs text-rose-400">Kupon #${i + 1}</p><p class="text-sm font-medium">${k[1]}</p></div></div>`,
+      ).join("");
+
+      // Loader
+      const bar = document.getElementById("bar");
+      let pr = 0;
+      const iv = setInterval(() => {
+        pr = Math.min(100, pr + Math.random() * 16);
+        bar.style.width = pr + "%";
+        if (pr >= 100) {
+          clearInterval(iv);
+          setTimeout(() => {
+            const l = document.getElementById("loader");
+            l.classList.add("opacity-0", "pointer-events-none");
+            document.body.classList.remove("overflow-hidden");
+            setTimeout(() => l.remove(), 800);
+          }, 500);
+        }
+      }, 260);
+
+      // Reveal saat scroll
+      const io = new IntersectionObserver(
+        (es) =>
+          es.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("on");
+              io.unobserve(e.target);
+            }
+          }),
+        { threshold: 0.15 },
+      );
+      document.querySelectorAll(".rv").forEach((e) => io.observe(e));
+
+      // Kelopak jatuh
+      const em = ["🌸", "🌹", "💗", "🌷", "🌺"];
+      function petal() {
+        const s = document.createElement("span");
+        s.className = "petal";
+        s.textContent = em[(Math.random() * em.length) | 0];
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.fontSize = 14 + Math.random() * 16 + "px";
+        s.style.animationDuration = 7 + Math.random() * 7 + "s";
+        s.style.opacity = 0.75;
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 15000);
+      }
+      if (!matchMedia("(prefers-reduced-motion:reduce)").matches)
+        setInterval(petal, 1100);
+
+      // Surat
+      document.getElementById("env").onclick = function () {
+        const l = document.getElementById("letter"),
+          o = l.classList.toggle("open");
+        this.setAttribute("aria-expanded", o);
+        document.getElementById("envHint").textContent = o
+          ? "Ketuk lagi untuk menutup"
+          : "Ketuk untuk membuka";
+      };
+
+      // Kado
+      document.getElementById("gift").onclick = function () {
+        const i = this.firstElementChild;
+        i.classList.add("shake");
+        setTimeout(() => {
+          this.classList.add("hidden");
+          document.getElementById("coupons").classList.remove("hidden");
+        }, 700);
+      };
+
+      // Tombol "Nggak" yang kabur
+      const no = document.getElementById("no"),
+        ar = document.getElementById("arena");
+      function run(e) {
+        e.preventDefault();
+        const w = ar.clientWidth - no.offsetWidth,
+          h = ar.clientHeight - no.offsetHeight;
+        no.style.left = "0";
+        no.style.marginLeft = "0";
+        no.style.transform = `translate(${Math.random() * w}px,${Math.random() * h}px)`;
+      }
+      no.addEventListener("mouseenter", run);
+      no.addEventListener("touchstart", run, { passive: false });
+      no.addEventListener("click", run);
+      document.getElementById("yes").onclick = () => {
+        ar.classList.add("hidden");
+        document.getElementById("yay").classList.remove("hidden");
+        for (let i = 0; i < 45; i++) setTimeout(petal, i * 60);
+      };
+    </script>
+  </body>
+</html>
